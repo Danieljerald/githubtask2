@@ -1,0 +1,98 @@
+@using System.ComponentModel.DataAnnotations;
+@model SignUpModel
+
+<html> 
+      <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="refresh" content="100">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Palanquin+Dark:wght@500&family=Rampart+One&display=swap" rel="stylesheet">
+            
+      </head>
+      @section Scripts
+        {
+          @{
+          <partial name="_ValidationScriptsPartial"/> 
+          }
+        }
+        
+      <body>
+        <section class="vh-100" style="background-color: #505050;">
+          <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                  <div class="card-body p-md-5">
+                    <div class="row justify-content-center">
+                      <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                        <form method="post" class="mx-1 mx-md-4">
+
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input type="text" id="username" minlength="6" maxlength="18" asp-for="name" class="form-control" required/>
+                              <label class="form-label"  asp-for="name">Your Name</label>
+                              <span asp-validation-for="name" style="font-family: 'Kalam', cursive;
+                              font-family: 'Palanquin Dark', sans-serif;
+                              font-family: 'Rampart One', cursive;
+                              font-family: 'Tilt Warp', cursive;"></span>
+                              
+                            </div>
+                          </div>
+
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input type="email" asp-for="email" class="form-control" />
+                              <label class="form-label" asp-for="email">Your Email</label>
+                            </div>
+                          </div>
+
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input type="password" id="password" minlength="8"  asp-for="password" class="form-control" required />
+                              <label class="form-label" asp-for="password">Password</label>
+                              <span asp-validation-for="password" style="font-family: 'Kalam', cursive;
+                              font-family: 'Palanquin Dark', sans-serif;
+                              font-family: 'Rampart One', cursive;
+                              font-family: 'Tilt Warp', cursive;"></span>
+                            </div>
+                          </div>
+
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <input type="password"asp-for="cpassword" class="form-control" />
+                              <label class="form-label" asp-for="cpassword">Repeat your password</label>
+                            </div>
+                          </div>
+                          <p style="color: red;">@ViewBag.message</p>
+                          <p style="color: rgb(66, 70, 48);"><span style="font-family: 'Kalam', cursive;
+                          font-family: 'Palanquin Dark', sans-serif;font-family: 'Rampart One', cursive;">@ViewBag.created</span></p>
+                          
+                          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                          </div>
+                        </form>
+
+                      </div>
+                      <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                        <img src="../img/signup.jpg" 
+                          class="img-fluid" alt="Sample image" style="width:100%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </body>
+</html>

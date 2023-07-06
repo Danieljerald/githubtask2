@@ -1,0 +1,75 @@
+﻿@model FeedbackModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+    </head>
+        <body style="background-color:rgb(0, 0, 0); background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(141, 126, 109));">
+            <div class="imgtext">
+            <img src="../img/indeximg.jpeg" id="homeimg" class="img-fluid" alt="Responsive image">
+            <h2 id="imgtext">All I Ate</h2>
+            <h6 id="imgtext2">-Every meal matters</h6>
+            </div>
+            <br>
+            <br>
+  <div id="feedback-form">
+            <H1>Feedback Form</H1>
+            <form method="post" >
+            <BR>
+                <span>Comment :</span><BR>        
+                <TEXTAREA asp-for="comment" rows="6" cols="50"></TEXTAREA>
+                <BR><br>
+                <span asp-validation-for="comment" style="font-family: 'Kalam', cursive;
+                              font-family: 'Palanquin Dark', sans-serif;
+                              font-family: 'Rampart One', cursive;
+                              font-family: 'Tilt Warp', cursive;"></span>
+                <INPUT id="submit" TYPE="submit" value="Send Feedback">
+                <INPUT id="reset" TYPE="reset" value="Reset">
+            </form>
+            <span style="font-family: 'Kalam', cursive;
+                              font-family: 'Palanquin Dark', sans-serif;
+                              font-family: 'Rampart One', cursive;
+                              font-family: 'Tilt Warp', cursive;">@ViewBag.feedback</span>
+        </div> 
+        </body>  
+        <style>
+            h1,span{
+                color: white;
+            }
+            #feedback-form{
+                margin-left: 10%;
+                margin-right: 50%;
+                padding-left: 50px;
+                padding-bottom: 20px;
+                padding-top: 20px;
+                background-color: rgb(78, 70, 61);
+            }
+            input
+            {
+                width: 45%;
+                border-color: rgb(255, 255, 255);
+                height: 3rem;
+                
+
+            }
+            textarea{
+                border-radius: 10px;
+            }
+            #submit:hover
+            {
+                background-color: rgb(203, 255, 203);
+                
+            }
+            #reset:hover
+            {
+                background-color: rgb(255, 182, 182);
+            }
+        </style>
+</html>

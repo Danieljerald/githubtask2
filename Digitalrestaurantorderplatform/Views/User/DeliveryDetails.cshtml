@@ -1,0 +1,101 @@
+@model OrderDetailsModel;
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+@section Scripts
+        {
+          @{
+          <partial name="_ValidationScriptsPartial"/> 
+          }
+        }
+<body style="background-color:rgb(191, 253, 250);">
+    <div id="outerdiv">
+    <div id="detail-box">
+        <h1>Delivery Details</h1><br>
+        <form method="post">
+
+        
+        <span>Name</span><br>
+        <input type="text" minlength="5"  asp-for="name" placeholder="Name" required><br><br>
+        <span  asp-validation-for="name" style="font-family: 'Kalam', cursive;
+                              font-family: 'Palanquin Dark', sans-serif;
+                              font-family: 'Rampart One', cursive;
+                              font-family: 'Tilt Warp', cursive;"></span><br>
+        <span>Employee Id</span><br>
+        <input type="text"  asp-for="empId" placeholder="ID" required><br><br>
+        <span>Floor,Bay</span><br>
+        <input type="text" asp-for="address"placeholder="Floor and Bay" required><br><br>
+        <span>Mobile no:</span><br>
+        <input type="number" asp-for="mobileNo" minlength="10" id="mobile" pattern="" placeholder="Mobile-no" required><br><br>
+        <span asp-validation-for="mobileNo" style="font-family: 'Kalam', cursive;
+                              font-family: 'Palanquin Dark', sans-serif;
+                              font-family: 'Rampart One', cursive;
+                              font-family: 'Tilt Warp', cursive;"></span><br>
+        
+        <INPUT id="reset" TYPE="reset" value="Reset">
+        <button>Buy</button>
+        </form>
+        
+    </div>
+    </div>
+</body> 
+<style>
+    
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button 
+        { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+    }
+    #outerdiv
+    {
+        margin-top: 5rem;
+    }
+    #detail-box 
+    {
+        padding: 10px 0;
+        
+        margin-top: 50;
+        border-style: ridge;
+        text-align: center;
+        padding: 100px;
+        background-color: rgb(255, 221, 152);
+    }
+    #reset:hover{
+        background-color: rgb(255, 187, 187);
+    }
+    #detail-box span
+    {
+        
+        font-weight: bold;
+        color: rgb(85, 62, 62);
+    }
+    #detail-box input
+    {
+        margin-top: 1rem;
+        width: 30%;
+        border: none;
+        padding: 10px 10px 10px 10px;
+    }
+    button{
+        width: 25%;
+        margin-top: 1rem;
+        padding: 10px 10px 10px 10px;
+        border: none;
+        border-radius: 5px;
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+    }
+    button:hover{
+        background-color: rgb(208, 255, 181);
+        color: black;
+    }
+</style>
+
+</html>

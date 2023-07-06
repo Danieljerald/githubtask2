@@ -1,0 +1,100 @@
+﻿@using System.Data;
+@model DataTable;
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
+</head>
+<body id="imgshop" style="overflow-x: hidden;" >
+     
+        <div >
+            <hr style="color:white;">
+            <h2 style="text-align:center;font-family: 'Kalam', cursive;font-family: 'Lobster Two', cursive; color:white;">La Carte</h2>
+            <hr style="color:white;">
+        </div>
+    <style>
+        
+        .card-img-top{
+        transition: .3s;
+        }
+        .card-img-top:hover{
+        transform: scale(1.02);
+        object-fit: contain;
+        }
+        .horizontal
+        {
+            display: grid;
+            grid-template-columns: auto auto auto ;
+            margin-left: 5%;
+        }
+        #width{
+            width: 200%;
+            margin-left: 5%;
+        }
+        .span
+        {
+            color: white;
+            font-style: font-family: 'Kalam', cursive;
+            
+        }
+        #imgshop
+        {
+            background-image: url(../../img/indeximg.jpeg);
+        }
+        #imghorizontal
+        {
+            margin-left: 38%;
+            word-spacing: 10px;
+            font-size: 30px;
+
+        }
+        #imghorizontal a{
+            text-decoration: none;
+        }
+        
+    </style>
+    
+        <div id="imghorizontal">
+                        <a href="@Url.Action("Shop", "User", new { filterItem = "*" })"><span class="span"><strong>All</strong></span></a>
+                        <a href="@Url.Action("Shop", "User", new { filterItem = "junk" })"><span class="span"><strong>Sandwich</strong></span></a>
+                        <a href="@Url.Action("Shop", "User", new { filterItem = "north" })"><span class="span"><strong>North</strong></span></a>
+                        <a href="@Url.Action("Shop", "User", new { filterItem = "south" })"><span class="span"><strong>South</strong></span></a>
+            
+        
+        </div><br><br><br>
+    
+        <div class="horizontal">
+            
+            @foreach(DataRow item in Model.Rows)
+            {
+                
+                <div id="width"class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" style="margin:25px">
+                    <div class="card h-100" style="padding:5px;margin:5px">
+                        @{
+                            string imageBase64Data = Convert.ToBase64String((byte[])item[3]);
+                            string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+                            <img  src=@imageDataURL class="card-img-top" alt="sandwich">
+                        }
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>@item[0]</strong></h5>
+                        <span style="font-family: 'Patua One', cursive;"><strong>₹:@item[1]</strong></span>
+                        <p class="card-text">@item[2]</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("addCart", "User",new { addCart = @item[0]})"><button type="button" class="btn btn-dark">Add to cart</button></a>
+                    </div>
+                    </div>
+                </div>
+                </div>               
+            }
+        </div>
+        
+</body>
+</html> 

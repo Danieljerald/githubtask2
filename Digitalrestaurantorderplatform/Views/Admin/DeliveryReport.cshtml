@@ -1,0 +1,50 @@
+@using System.Data
+@model DataTable
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Food</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Name</th>
+                <th scope="col">Delivery Details</th>
+                <th scope="col">Ordered On</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+
+            </tr>
+        </thead>
+        <tbody>
+             @foreach (DataRow item in @Model.Rows)
+             {
+                <tr>
+                    <td>@item[0]</td>
+                    <td>@item[1]</td>
+                    <td>@item[3]</td>
+                    <td>@item[4]<br>@item[5]<br>@item[6]<br></td>
+                    <td>@item[9]</td>
+                    <td>@item[10]</td>
+                    <td>@item[2]</td>
+                    <td>@item[7]</td>
+                </tr>
+             }
+                    
+              
+            
+        </tbody>
+    </table>
+</body>
+<style>
+    body{
+        background-color: white;
+    }
+</style>
+</html>

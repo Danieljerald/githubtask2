@@ -1,0 +1,87 @@
+@using System.Data;
+@model DataTable;
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View orders</title>
+</head>
+
+<body>
+    <div id="page-header">
+        <h2 id="h2">Your Orders</h2>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Sort Order
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="@Url.Action("ViewOrder", "User", new { sort = "last1day"})">last 1 day</a></li>
+            <li><a class="dropdown-item" href="@Url.Action("ViewOrder", "User", new { sort = "last10day"})">last 10 days</a></li>
+            <li><a class="dropdown-item" href="@Url.Action("ViewOrder", "User", new { sort = "All"})">All</a></li>
+        </ul>
+    </div>
+    <table class="table">
+        <thead>
+            <tr> 
+                <th scope="col">Food</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Status</th>
+                <th scope="col">orderId</th>
+                <th scope="col">Delivery Details</th>
+                <th scope="col">Ordered On</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow item in @Model.Rows)
+            {
+                string status=Convert.ToString(@item[7]);
+            <tr>
+                <td>@item[0]</td>
+                <td>@item[1]</td>
+                <td>@item[7]</td>
+                <td>@item[10]</td>
+                <td>@item[3]<br>,@item[4]<br>,@item[5]<br>,@item[6]</td>
+                <td>@item[9]</td>
+                <td>₹: @item[2]</td>
+                @if(status=="In process")
+                {
+                    <td><a href="@Url.Action("CancelOrder", "User", new { orderId = @item[10], foodname = @item[0]})"><input type="button" value="Cancel"></a></td>
+                }
+            </tr> 
+            }
+            
+        </tbody>
+    </table>
+</body>
+<style>
+    body {
+        background-color: rgb(197, 225, 250);
+
+    }
+
+    #h2 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    #page-header {
+        background-color: aliceblue;
+
+        width: 100%;
+        height: 15vh;
+        padding: 2px;
+    }
+
+    th {
+        font-weight: bold;
+    }
+</style>
+
+</html>

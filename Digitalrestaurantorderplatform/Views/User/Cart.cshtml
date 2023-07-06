@@ -1,0 +1,97 @@
+@using System.Data;
+@model DataTable;
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="background-color: rgb(204, 204, 204);">
+    <style>
+        #delete:hover {
+            background-color: red;
+
+        }
+        .plusminus
+        {
+            border: none;
+            
+            padding: 7px;
+            color:black;
+        }
+        #bottom-navbar
+        {
+            background-color: rgb(237, 246, 253);
+            position: fixed;
+            bottom: 0;
+            height: 11%;
+            width: 100%;
+            left: 0;
+            
+        }
+        #button-checkout
+        {
+            border-radius: 15px;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            background-color: rgb(128, 255, 128);
+            border: none;
+            width: 5%;
+            height: 40%;
+        }
+        #bottom-navbar h3
+        {
+            top: 10%;
+            left: 48%;
+            position: absolute;
+        }
+    </style>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Food Name</th>
+                <th scope="col"></th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+                foreach (DataRow item in Model.Rows)
+                {
+                    
+                    <tr>
+                        <td>@item[0]</td>
+                        @{
+                        string imageBase64Data = Convert.ToBase64String((byte[])@item[4]);
+                        string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+                        <td style="width:10%;"><img style="width:50%;" src=@imageDataURL></td>
+                        }
+                        <td>₹: @item[1]</td>
+                       
+                        <td><a href="@Url.Action("modifyQuantity", "User", new { foodname= @item[0], operation= "minus"})"><input style="border: 0px solid;"
+                                    class="plusminus" type="button" value="-" /></a>@item[2]<a href="@Url.Action("modifyQuantity", "User", new { foodname= @item[0], operation= "plus"})"><input
+                                    class="plusminus" type="button" value="+" /></a></td>
+
+                        <td><a href="@Url.Action("removeCart", "User", new { foodname = @item[0]})"><input style="border: 0px solid;"
+                                    id="delete" type="button" value="Delete" /></a></td>
+                        
+                               
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+<div id="bottom-navbar">
+        <h3>Total Price:<span style="color:red;">@ViewBag.totalPrice</span></h3>
+        <a asp-controller="User" asp-action="DeliveryDetails"><input type="button" value="Checkout" id="button-checkout"></a>
+</div>
+    
+</body>
+
+</html>
+

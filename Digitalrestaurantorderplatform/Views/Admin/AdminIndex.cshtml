@@ -1,0 +1,65 @@
+@model IEnumerable<FeedbackModel>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome Admin </h1><hr><br>
+    <span style="color: rgb(255, 45, 45);">@TempData["Time"]</span><hr><br>
+
+    <h4>Total number of customers : @ViewBag.count</h4><br><br>
+    <a href="@Url.Action("DeliveryReport", "Admin")"><input style="margin-left:90%;border:0px;width:5%;height:35px" id="report-btn" type="button" value="Report"></a><br><br>
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+
+      
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in ViewBag.customerList)
+    {
+    <tr>
+      <th>@item.name</th>
+      <td>@item.email</td>
+      <td><a href="@Url.Action("DownloadReport", "Admin", new { empname = @item.name })"><input style="margin-left:70%;border:0px;width:20%;height:35px" id="report-btn" type="button" value="Download Report"></a></td>
+
+    </tr>
+    }
+    
+  </tbody>
+</table>
+    <h2 style="text-align: center;">Feedback's</h2><br>
+    <a asp-controller="Admin" asp-action="clearFeedbacks" ><input type="button" value="Clear All" style="margin-left:90%" class="btn btn-danger"></a>
+    <br>
+
+    <table class="table">
+        <thead>
+            <tr> 
+                <th scope="col">Username</th>
+                <th scope="col">Message</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (FeedbackModel item in Model)
+        {
+            <tr>
+            <td>@item.username</td>
+            <td>@item.comment</td>
+            </tr>
+        }
+  </tbody>
+    </table>
+</body>
+<style>
+   body{
+    background-color: rgb(255, 251, 240);
+   }
+</style>
+</html>

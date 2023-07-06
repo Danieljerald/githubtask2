@@ -1,0 +1,83 @@
+@model MenuModel
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Product</title>
+</head>
+<style>
+    body {
+        background-color: rgb(255, 251, 240);
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    #form {
+        height: 700px;
+        margin: 8%;
+        margin-left: 15%;
+        margin-right: 30%;
+        border: 2px solid black;
+        padding: 30px;
+        padding-left: 20%;
+        background-color: rgb(174, 213, 224);
+    }
+
+    #dropdown {
+        width: 190px;
+        height: 40px;
+    }
+
+    .button {
+        width: 120px;
+        height: 40px;
+        border: none;
+    }
+
+    .button:hover {
+        background-color: black;
+        color: white;
+    }
+    
+</style>
+@section Scripts
+        {
+          @{
+          <partial name="_ValidationScriptsPartial"/> 
+          }
+        }
+<body>
+    <div id="form">
+        <h3>Add Product</h3><br>
+        <form method="post" asp-action="ManageProduct" asp-controller="Admin" enctype="multipart/form-data">
+        <span>Food Name:</span><br>
+        <input type="text" asp-for="foodname" class="input"><br><br>
+        <span>Amount:</span><br>
+        <input type="number" asp-for="amount" class="input"><br><br>
+        <span>categories:</span><br>
+        <select asp-for="categories" id="dropdown">
+            <option value="junk">junk</option>
+            <option value="north">North</option>
+            <option value="south">South</option>
+        </select>
+        <br><br>
+        <span>caption:</span><br>
+        <textarea class="input" asp-for="caption" rows="4" cols="50"></textarea><br><br>
+        <span>Image:</span><br>
+        <input type="file" asp-for="image" class="input"><br><br>
+        <input type="submit" class="button" value="Add">
+        </form>
+        <a asp-action="Menu" asp-controller="Admin"><input type="submit" class="button" value="View Menu" ></a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+@using System.Data;
+@model DataTable;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ 
+
+body{
+    background-color: rgb(255, 251, 240);
+   }
+   #orderdone-btn{
+        width: 45%;
+        margin-top: 1rem;
+        padding: 10px 10px 10px 10px;
+        border: none;
+        border-radius: 10px;
+        color: rgb(0, 0, 0);
+        background-color: rgb(222, 255, 213);
+   }
+
+</style>
+<body>
+    <h2 style="text-align: center;">Manage Order</h2>
+        <div style="margin-left:80%" class="dropdown">
+        <strong style="color:white"> Select Order : </strong> <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            OrderId
+        </a>
+        <ul class="dropdown-menu">
+            @foreach (DataRow item in @Model.Rows)
+            {
+                if (Convert.ToString(@item[7])=="In process")
+                {
+                  <li><a class="dropdown-item" href="@Url.Action("ManageOrder", "Admin", new { orderid = @item[10] , orderstatus = "dispatched" })">@item[10]</a></li>  
+                }
+            
+            }
+        </ul>
+        </div><br><br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Food</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">orderId</th>
+                <th scope="col">Delivery Details</th>
+                <th scope="col">Ordered On</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+             @foreach (DataRow item in @Model.Rows)
+            {
+                
+                if (Convert.ToString(@item[7])=="Dispatched")
+                {
+                    <tr>
+                    <td>@item[0]</td>
+                    <td>@item[1]</td>
+                    <td>@item[10]</td>
+                    <td>@item[3]<br>,@item[4]<br>,@item[5]<br>,@item[6]</td>
+                    <td>@item[9]</td>
+                    <td>@item[2]</td>
+                    <td>@item[7]</td>
+                    <td><a href="@Url.Action("ManageOrder", "Admin", new { orderId = @item[10] , orderstatus = "delivered"})"><input id="orderdone-btn" type="button" value="Order Done"></a></td>
+                    </tr>
+                }
+            }
+            
+        </tbody>
+    </table>
+</body>
+
+</html>
