@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danny\\Downloads\\Feedback\\Feedback.csproj": {}
+    "F:\\internproj\\Feedback\\Feedback.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danny\\Downloads\\Feedback\\Feedback.csproj": {
+    "F:\\internproj\\Feedback\\Feedback.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danny\\Downloads\\Feedback\\Feedback.csproj",
+        "projectUniqueName": "F:\\internproj\\Feedback\\Feedback.csproj",
         "projectName": "Feedback",
-        "projectPath": "C:\\Users\\danny\\Downloads\\Feedback\\Feedback.csproj",
+        "projectPath": "F:\\internproj\\Feedback\\Feedback.csproj",
         "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danny\\Downloads\\Feedback\\obj\\",
+        "outputPath": "F:\\internproj\\Feedback\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -120,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.5.23303.2\\RuntimeIdentifierGraph.json"
         }
       }
     }

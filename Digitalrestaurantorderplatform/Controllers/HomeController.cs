@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Digitalrestaurantorderplatform.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 #nullable disable
@@ -11,10 +9,16 @@ namespace Digitalrestaurantorderplatform.Controllers;
 [Log]
 public class HomeController : Controller
 {
-   private AppDbContext _database;
-   public HomeController(AppDbContext database)
+    private AppDbContext _database;
+    private readonly string adminUsername,adminPassword;
+
+    private IConfiguration _configuration;
+    public HomeController(AppDbContext database,IConfiguration configuration)
    {
-    _database=database;
+        _database=database;
+        _configuration=configuration;
+        adminUsername=configuration["AdminLogin:AdminId"];
+        adminPassword=configuration["AdminLogin:Password"];
    }
     public class SessionNotFoundException : Exception  
     {  
@@ -100,8 +104,8 @@ public class HomeController : Controller
     public IActionResult Login(LoginModel login)
     {
         ViewBag.admin=HttpContext.Session.GetString("admin");
-        
-        int check=RegisterModel.loginValidation(login);
+        RegisterModel registerModel=new RegisterModel(_configuration);
+        int check=registerModel.loginValidation(login,adminUsername,adminPassword);
         if(check==1)
         {
             HttpContext.Session.SetString("user",login.name);
@@ -140,11 +144,11 @@ public class HomeController : Controller
     [HttpPost]
      public IActionResult SignUp(SignUpModel register)
      {
-
         ViewBag.admin=HttpContext.Session.GetString("admin");
 
+        RegisterModel registerModel=new RegisterModel(_configuration);
         int check;
-        check=RegisterModel.signUpValidation(register);
+        check=registerModel.signUpValidation(register);
         if(check == 1)
         {
             
@@ -175,10 +179,10 @@ public class HomeController : Controller
      public IActionResult UserDetails(SignUpModel register)
 
      {
+        ViewBag.admin=HttpContext.Session.GetString("admin");
         //Adding user accounts in EF table 
         _database.customerlist.Add(register);
         _database.SaveChanges();
-
         ViewBag.created="Account created successfully:)";
         return View("SignUp");
      }
@@ -191,7 +195,8 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult ForgotPassword(SignUpModel details)
     {
-        int check=RegisterModel.ResetPassword(details);
+        RegisterModel registerModel=new RegisterModel(_configuration);
+        int check=registerModel.ResetPassword(details);
         if(check==1)
         {
             var profile=_database.customerlist.Find(details.name);

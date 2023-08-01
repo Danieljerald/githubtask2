@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danny\\Downloads\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {}
+    "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danny\\Downloads\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {
+    "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danny\\Downloads\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
+        "projectUniqueName": "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
         "projectName": "Digitalrestaurantorderplatform",
-        "projectPath": "C:\\Users\\danny\\Downloads\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
+        "projectPath": "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
         "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danny\\Downloads\\Digitalrestaurantorderplatform\\obj\\",
+        "outputPath": "F:\\internproj\\Digitalrestaurantorderplatform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[7.0.3, )"
             },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.0-preview.6.23329.7, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
               "target": "Package",
               "version": "[7.0.3, )"
@@ -104,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.5.23303.2\\RuntimeIdentifierGraph.json"
         }
       }
     }

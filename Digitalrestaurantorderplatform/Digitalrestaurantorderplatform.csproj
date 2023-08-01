@@ -16,5 +16,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="7.0.3"/>
     <PackageReference Include="iTextSharp" Version="5.5.13.3"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0-preview.6.23329.7"/>
   </ItemGroup>
 </Project>

@@ -5,13 +5,13 @@ using System.Data.SqlClient;
 
 namespace Digitalrestaurantorderplatform.Models
 {
-    public class RegisterModel
+    class RegisterModel
     {
-        static Dictionary<string, string[]> userlist = new Dictionary<string, string[]>();
 
-        static RegisterModel()
+        private Dictionary<string, string[]> userlist = new Dictionary<string, string[]>();
+        public RegisterModel(IConfiguration configuration)
         {
-            using (SqlConnection connection = new SqlConnection(getConnectionString()))
+            using (SqlConnection connection = new SqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
             {
                 try
                 {
@@ -20,10 +20,14 @@ namespace Digitalrestaurantorderplatform.Models
                     SqlDataReader sqlReader = sqlCommand.ExecuteReader();
                     while (sqlReader.Read())
                     {
+                        
                         string[] userdata = new string[2];
                         userdata[0] = sqlReader["email"].ToString();
                         userdata[1] = sqlReader["password"].ToString();
-                        userlist.Add(sqlReader["name"].ToString(), userdata);
+                        if (!userlist.ContainsKey(sqlReader["name"].ToString()))
+                        {
+                            userlist.Add(sqlReader["name"].ToString(), userdata);
+                        }
                     }
                 }
                 catch (SqlException sqlException)
@@ -36,20 +40,22 @@ namespace Digitalrestaurantorderplatform.Models
                 }
             }
         }
-        public static String getConnectionString()
-        {
-             var build = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            IConfiguration configuration = build.Build();
+        // public static String getConnectionString()
+        // {
 
-            String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
-            if(connectionString != null)
-                return connectionString;
-            return "";
-        }
-        public static int signUpValidation(SignUpModel signupmodel)
+        //     //  var build = new ConfigurationBuilder()
+        //     // .SetBasePath(Directory.GetCurrentDirectory())
+        //     // .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        //     // IConfiguration configuration = build.Build();
+
+        //     // String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
+        //     // if(connectionString != null)
+        //     //     return connectionString;
+        //     // return "";
+        // }
+        internal int signUpValidation(SignUpModel signupmodel)
         {
             string username = signupmodel.name;
             string email = signupmodel.email;
@@ -90,13 +96,13 @@ namespace Digitalrestaurantorderplatform.Models
             return 2;
         }
 
-        public static int loginValidation(LoginModel loginmodel)
+        internal int loginValidation(LoginModel loginmodel,string adminUsername,string adminPassword)
         {
+            
             string username = loginmodel.name;
             string password = loginmodel.password;
             bool loginflag = false;
-            string adminUsername="admin@123";
-            string adminPassword="admin@321";
+
             if (String.Equals(username,adminUsername) && String.Equals(password,adminPassword) )
             {
                 return 3;
@@ -121,7 +127,7 @@ namespace Digitalrestaurantorderplatform.Models
             }
 
         }
-        public static int ResetPassword(SignUpModel details)
+        internal int ResetPassword(SignUpModel details)
         {
             string username = details.name;
             string email = details.email;
