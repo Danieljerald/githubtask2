@@ -22,6 +22,12 @@ public class UserController:Controller
             throw new DuplicateItemFoundException("Duplicate item found item not added into database");  
         }  
     }
+
+    private IConfiguration _configuration;
+    public UserController(IConfiguration configuration)
+    {
+        _configuration=configuration;
+    }
     [HttpGet]
     public IActionResult Shop(string filterItem)
     {
@@ -36,8 +42,8 @@ public class UserController:Controller
         {
             HttpContext.Session.SetString("user","");
         }
-        
-        DataTable dataTable=ProductModel.getProductDetails(filterItem);
+        ProductModel productModel=new ProductModel(_configuration);
+        DataTable dataTable=productModel.getProductDetails(filterItem);
         return View(dataTable);
         
         
@@ -54,7 +60,8 @@ public class UserController:Controller
             ViewBag.user=HttpContext.Session.GetString("user");
             
             string username=HttpContext.Session.GetString("user");
-            int check=ProductModel.addCartItems(addCart,username);
+            ProductModel productModel=new ProductModel(_configuration);
+            int check=productModel.addCartItems(addCart,username);
             try
             {
                 checkCart(check);
@@ -76,8 +83,9 @@ public class UserController:Controller
         {
             ViewBag.user=HttpContext.Session.GetString("user");
             string username=HttpContext.Session.GetString("user").ToString();
-            ViewBag.totalPrice=ProductModel.getTotalPrice(username);
-            DataTable datatable=ProductModel.getCartList(username);
+            ProductModel productModel=new ProductModel(_configuration);
+            ViewBag.totalPrice=productModel.getTotalPrice(username);
+            DataTable datatable=productModel.getCartList(username);
             return View(datatable);
         }
         else
@@ -90,7 +98,8 @@ public class UserController:Controller
     {
         ViewBag.user=HttpContext.Session.GetString("user");
         string username=HttpContext.Session.GetString("user").ToString();
-        ProductModel.deleteCart(foodname,username);
+        ProductModel productModel=new ProductModel(_configuration);
+        productModel.deleteCart(foodname,username);
         return RedirectToAction("Cart");
     }
     public IActionResult modifyQuantity(string foodname,string operation)
@@ -99,11 +108,13 @@ public class UserController:Controller
         string username=HttpContext.Session.GetString("user").ToString();
         if (operation=="minus")
         {
-            ProductModel.decreaseQuantity(foodname,username);
+            ProductModel productModel=new ProductModel(_configuration);
+            productModel.decreaseQuantity(foodname,username);
         }
         else
         {
-            ProductModel.increaseQuantity(foodname,username);
+            ProductModel productModel=new ProductModel(_configuration);
+            productModel.increaseQuantity(foodname,username);
         }
         return RedirectToAction("Cart");
     }
@@ -121,7 +132,8 @@ public class UserController:Controller
         ViewBag.user=HttpContext.Session.GetString("user");
         ViewBag.admin=HttpContext.Session.GetString("admin");
         string username=HttpContext.Session.GetString("user").ToString();
-        int check=OrderModel.getDeliveryDetails(username,orderdetails);
+        OrderModel orderModel=new OrderModel(_configuration);
+        int check=orderModel.getDeliveryDetails(username,orderdetails);
         if (check==1)
         {
             return RedirectToAction("ViewOrder");
@@ -139,7 +151,8 @@ public class UserController:Controller
 
         string name=HttpContext.Session.GetString("user");
         ViewBag.user=HttpContext.Session.GetString("user");
-        DataTable datatable=OrderModel.viewOrderList(name,sort);
+        OrderModel orderModel=new OrderModel(_configuration);
+        DataTable datatable=orderModel.viewOrderList(name,sort);
         return View(datatable);
     }
     
@@ -147,7 +160,8 @@ public class UserController:Controller
     public IActionResult CancelOrder(string orderId,string foodname)
     {
         string name=HttpContext.Session.GetString("user");
-        OrderModel.removeOrder(name,orderId,foodname);
+        OrderModel orderModel=new OrderModel(_configuration);
+        orderModel.removeOrder(name,orderId,foodname);
         return RedirectToAction("ViewOrder");
     }
 

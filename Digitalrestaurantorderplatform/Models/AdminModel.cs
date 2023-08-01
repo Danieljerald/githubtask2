@@ -4,29 +4,34 @@ using System.Data.SqlClient;
 #nullable disable
 namespace Digitalrestaurantorderplatform.Models;
 
-public class AdminModel
+class AdminModel
 {
-    public static String getConnectionString()
-        {
-             var build = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+    // public static String getConnectionString()
+    //     {
+    //          var build = new ConfigurationBuilder()
+    //         .SetBasePath(Directory.GetCurrentDirectory())
+    //         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            IConfiguration configuration = build.Build();
+    //         IConfiguration configuration = build.Build();
 
-            String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
-            if(connectionString != null)
-                return connectionString;
-            return "";
-        }
+    //         String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
+    //         if(connectionString != null)
+    //             return connectionString;
+    //         return "";
+    //     }
+    private readonly string connectionString;
+    internal AdminModel(IConfiguration configuration)
+    {
+        connectionString=configuration["ConnectionStrings:DefaultConnection"];
+    }
     //thread method
     static void Print()
     {
         Console.WriteLine("Changes successful");
     }
-     public static DataTable getOrderList()
+    internal DataTable getOrderList()
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist order by datetime ", sqlConnection);
@@ -37,9 +42,9 @@ public class AdminModel
         } 
 
     }
-    public static void changeStatus(string orderid)
+    internal void changeStatus(string orderid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("update orderlist set status='Dispatched' where orderid=@value", sqlConnection);
@@ -47,9 +52,9 @@ public class AdminModel
             sqlCommand.ExecuteNonQuery();
         }
     } 
-    public static void updateStatus(string orderid)
+    internal void updateStatus(string orderid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("update orderlist set status='Delivered' where orderid=@value", sqlConnection);
@@ -57,12 +62,12 @@ public class AdminModel
             sqlCommand.ExecuteNonQuery();
         }
     }
-    public static void updateMenu(MenuModel menu)
+    internal void updateMenu(MenuModel menu)
     {
         
         try
         {           
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("insert into menu values(@value,@value2,@value3,@value4,@value5,@value6)", sqlConnection);
@@ -83,9 +88,9 @@ public class AdminModel
         
         
     }
-    public static DataTable viewMenu()
+    internal DataTable viewMenu()
     {          
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("select * from menu", sqlConnection);
@@ -95,9 +100,9 @@ public class AdminModel
             return dataTable;
         }
     }
-    public static void updateVisibility(string visibility,int productid)
+    internal void updateVisibility(string visibility,int productid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection("Data source=ASPIRE1528; Database = userdetails; Integrated security=SSPI"))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             //creating thread
             Thread thread = new Thread(new ThreadStart(Print));
@@ -111,9 +116,9 @@ public class AdminModel
         }
 
     }
-    public static void deleteFood(int productid)
+    internal void deleteFood(int productid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("delete from menu where productid=@value", sqlConnection);
@@ -122,9 +127,9 @@ public class AdminModel
         }
 
     }
-    public static DataTable fetchReport()
+    internal DataTable fetchReport()
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("select * from orderlist where status ='Delivered' and  (datetime between DATEADD(day,-30,GETDATE()) and datetime) order by datetime desc", sqlConnection);
@@ -134,10 +139,10 @@ public class AdminModel
             return dataTable;
         }
     }
-    public static DataTable downloadReport(string empname)
+    internal DataTable downloadReport(string empname)
     {
 
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("select * from orderlist where status ='Delivered'and username=@value  and  (datetime between DATEADD(day,-30,GETDATE()) and datetime) order by datetime desc", sqlConnection);

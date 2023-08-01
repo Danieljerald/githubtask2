@@ -14,9 +14,11 @@ using iTextSharp.text.pdf;
 public class AdminController : Controller
 {
     private AppDbContext _database;
-   public AdminController(AppDbContext database)
+    private IConfiguration _configuration;
+   public AdminController(AppDbContext database,IConfiguration configuration)
    {
          _database=database;
+         _configuration=configuration;
    }
 
 
@@ -44,18 +46,19 @@ public class AdminController : Controller
     }
     public IActionResult ManageOrder(string orderid , string orderstatus)
     {
+        AdminModel adminModel=new AdminModel(_configuration);
         if (orderid!=null && orderstatus!=null)
         {
             if (orderstatus=="dispatched")
             {
-                AdminModel.changeStatus(orderid);
+                adminModel.changeStatus(orderid);
             }
             else
             {
-                AdminModel.updateStatus(orderid);  
+                adminModel.updateStatus(orderid);  
             }
         }
-        DataTable datatable=AdminModel.getOrderList(); 
+        DataTable datatable=adminModel.getOrderList(); 
         return View(datatable);
     }
     [HttpGet]
@@ -72,34 +75,39 @@ public class AdminController : Controller
             file.CopyTo(memoryStream);
             menu.image = memoryStream.ToArray();
         }
-        AdminModel.updateMenu(menu);
+        AdminModel adminModel=new AdminModel(_configuration);
+        adminModel.updateMenu(menu);
         return RedirectToAction("Menu");
     }
     [HttpGet]
     public IActionResult Menu(string visibility,int productid)
     {
+        AdminModel adminModel=new AdminModel(_configuration);
         if (visibility!=null)
         {  
-            AdminModel.updateVisibility(visibility,productid);
+            adminModel.updateVisibility(visibility,productid);
         }
-        DataTable datatable=AdminModel.viewMenu();
+        DataTable datatable=adminModel.viewMenu();
         return View(datatable);
     }
     public IActionResult MenuDelete(int productid)
     {
-        AdminModel.deleteFood(productid);
+        AdminModel adminModel=new AdminModel(_configuration);
+        adminModel.deleteFood(productid);
         return RedirectToAction("Menu");
     }
     public IActionResult DeliveryReport()
     {
-        DataTable datatable=AdminModel.fetchReport();
+        AdminModel adminModel=new AdminModel(_configuration);
+        DataTable datatable=adminModel.fetchReport();
         return View(datatable);
     }
     public ActionResult DownloadReport(string empname)
     {
         try
         {
-            DataTable datatable =AdminModel.downloadReport(empname);
+            AdminModel adminModel=new AdminModel(_configuration);
+            DataTable datatable =adminModel.downloadReport(empname);
 
             var memoryStream = new MemoryStream();
             var document = new Document(PageSize.A4, 50, 50, 25, 25);

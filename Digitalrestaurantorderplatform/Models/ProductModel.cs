@@ -7,27 +7,17 @@ using System.Data.SqlClient;
 
 namespace Digitalrestaurantorderplatform.Models;
 
-public class ProductModel
+class ProductModel
 {
-    public static String getConnectionString()
-        {
-             var build = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            IConfiguration configuration = build.Build();
-
-            String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
-            if(connectionString != null)
-                return connectionString;
-            return "";
-        }
-        
-    
-    public static DataTable getProductDetails(string filterItem)
+    private readonly string connectionString;
+    internal ProductModel(IConfiguration configuration)
+    {
+        connectionString=configuration["ConnectionStrings:DefaultConnection"];
+    }
+    internal DataTable getProductDetails(string filterItem)
     {
 
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             if(filterItem==null)
@@ -59,12 +49,12 @@ public class ProductModel
         }
 
     }
-    public static int addCartItems(string addCart,string name)
+    internal int addCartItems(string addCart,string name)
     {
         MenuModel menuModel=new MenuModel();
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {    
                 
                 sqlConnection.Open();
@@ -78,7 +68,7 @@ public class ProductModel
                     menuModel.image=(byte[])sqlDataReader[3];   
                 }
             }
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {    
                 
                 sqlConnection.Open();
@@ -91,7 +81,7 @@ public class ProductModel
                     return 2;
                 }
             }
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("insert into cartlist values(@value,@value2,@value3,@value4,@value5)",sqlConnection);
@@ -118,9 +108,9 @@ public class ProductModel
         }
         
     }
-    public static DataTable getCartList(string name)
+    internal DataTable getCartList(string name)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("SELECT * from cartlist where username=@value", sqlConnection);
@@ -131,9 +121,9 @@ public class ProductModel
             return dataTable;
         } 
     }
-    public static void deleteCart(string foodname,string name)
+    internal void deleteCart(string foodname,string name)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand=new SqlCommand("delete from cartlist where foodname= @value and username=@value2", sqlConnection);
@@ -149,11 +139,11 @@ public class ProductModel
             }
         }
     }
-    public static void increaseQuantity(string foodname,string name)
+    internal void increaseQuantity(string foodname,string name)
     {
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("update cartlist set quantity=quantity+1 where username=@value and foodname=@value2 ", sqlConnection);
@@ -168,7 +158,7 @@ public class ProductModel
         }
         
     }
-    public static void decreaseQuantity(string foodname,string name)
+    internal void decreaseQuantity(string foodname,string name)
     {
         int count=0;
         using (SqlConnection sqlConnection = new SqlConnection("Data source=ASPIRE1528; Database = userdetails; Integrated security=SSPI"))
@@ -183,7 +173,7 @@ public class ProductModel
                 count=Convert.ToInt32(sqlDataReader["quantity"].ToString());
             }
         }
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             if(count>1)
             {
@@ -195,12 +185,12 @@ public class ProductModel
             }
         }    
     }
-    public static int getTotalPrice(string username)
+    internal int getTotalPrice(string username)
     {
         int count=0;
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("select sum(amount*quantity) from cartlist where username=@value", sqlConnection);
@@ -221,12 +211,12 @@ public class ProductModel
         }
         
     }
-    public static int getProductTotalPrice(string username)
+    internal int getProductTotalPrice(string username)
     {
         int count=0;
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("select amount*quantity from cartlist where username=@value", sqlConnection);

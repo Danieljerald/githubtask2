@@ -4,33 +4,27 @@ using System.Data.SqlClient;
 #nullable disable
 namespace Digitalrestaurantorderplatform.Models;
 
-public class OrderModel
+class OrderModel
 {
-    public static String getConnectionString()
-        {
-             var build = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            IConfiguration configuration = build.Build();
-
-            String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
-            if(connectionString != null)
-                return connectionString;
-            return "";
-        }
-    public static int getDeliveryDetails(string username,OrderDetailsModel orderDetails)
+    private readonly string connectionString;
+    private IConfiguration _configuration;
+    internal OrderModel(IConfiguration configuration)
+    {
+        _configuration=configuration;
+        connectionString=configuration["ConnectionStrings:DefaultConnection"];
+    }
+    internal int getDeliveryDetails(string username,OrderDetailsModel orderDetails)
     {
         bool flag=false;
         string name=orderDetails.name;
         string empId=orderDetails.empId;
         string address=orderDetails.address;
         string mobileNo=orderDetails.mobileNo;
-        
-        int totalPrice=ProductModel.getProductTotalPrice(username);
+        ProductModel productModel=new ProductModel(_configuration);
+        int totalPrice=productModel.getProductTotalPrice(username);
         List<string[]> productList=new List<string[]>();
 
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("SELECT * from cartlist where username=@value", sqlConnection);
@@ -44,7 +38,7 @@ public class OrderModel
                 productList.Add(cartItems);
             }  
         }
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             try
             {
@@ -90,7 +84,7 @@ public class OrderModel
         }
         if (flag)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("delete from cartlist where username=@value", sqlConnection);
@@ -102,11 +96,11 @@ public class OrderModel
         return 1;
     }
 
-    public static DataTable viewOrderList(string username,string sort)
+    internal DataTable viewOrderList(string username,string sort)
     {
         if (sort=="All")
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist where username=@value order by datetime desc ", sqlConnection);
@@ -119,7 +113,7 @@ public class OrderModel
         }
         else if (sort=="last1day")
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist where username=@value and (datetime between DATEADD(day,-1,GETDATE()) and datetime) order by datetime desc ", sqlConnection);
@@ -132,7 +126,7 @@ public class OrderModel
         }
         else
         {
-            using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist where username=@value and (datetime between DATEADD(day,-10,GETDATE()) and datetime) order by datetime desc", sqlConnection);
@@ -144,9 +138,9 @@ public class OrderModel
             }  
         }
     }
-    public static void removeOrder(string username,string orderId,string foodname)
+    internal void removeOrder(string username,string orderId,string foodname)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(getConnectionString()))
+        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("delete from orderlist where username=@value and orderid=@value2 and foodname=@value3", sqlConnection);
