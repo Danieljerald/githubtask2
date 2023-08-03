@@ -49,7 +49,7 @@ public class UserController:Controller
         
     }
     
-    public IActionResult addCart(string addCart)
+    public IActionResult addCart(string foodName)
     {
         if (HttpContext.Session.GetString("user")=="")
         {
@@ -61,7 +61,7 @@ public class UserController:Controller
             
             string username=HttpContext.Session.GetString("user");
             ProductModel productModel=new ProductModel(_configuration);
-            int check=productModel.addCartItems(addCart,username);
+            int check=productModel.addCartItems(foodName,username);
             try
             {
                 checkCart(check);

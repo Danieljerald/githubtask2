@@ -13,22 +13,24 @@ class OrderModel
         _configuration=configuration;
         connectionString=configuration["ConnectionStrings:DefaultConnection"];
     }
-    internal int getDeliveryDetails(string username,OrderDetailsModel orderDetails)
+    internal int getDeliveryDetails(string userName,OrderDetailsModel orderDetails)
     {
         bool flag=false;
         string name=orderDetails.name;
         string empId=orderDetails.empId;
         string address=orderDetails.address;
         string mobileNo=orderDetails.mobileNo;
-        ProductModel productModel=new ProductModel(_configuration);
-        int totalPrice=productModel.getProductTotalPrice(username);
+        
         List<string[]> productList=new List<string[]>();
 
         using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("SELECT * from cartlist where username=@value", sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@value",username);
+            SqlCommand sqlCommand = new SqlCommand("EditCartList", sqlConnection);
+            sqlCommand.CommandType=CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@operation","getCartList");
+            sqlCommand.Parameters.AddWithValue("@action","selectCartList");
+            sqlCommand.Parameters.AddWithValue("@name",userName);
             SqlDataReader sqlDataReader=sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
@@ -38,6 +40,8 @@ class OrderModel
                 productList.Add(cartItems);
             }  
         }
+        ProductModel productModel=new ProductModel(_configuration);
+        int totalPrice=productModel.getTotalPrice(userName);
         using (SqlConnection sqlConnection = new SqlConnection(connectionString))
         {
             try
@@ -55,18 +59,21 @@ class OrderModel
                 foreach(string[] item in productList)
                 {
                     sqlConnection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("insert into orderlist values(@value,@value2,@value3,@value4,@value5,@value6,@value7,@value8,@value9,@value10,@value11)", sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@value",item[0]);
-                    sqlCommand.Parameters.AddWithValue("@value2",Convert.ToInt16(item[1]));
-                    sqlCommand.Parameters.AddWithValue("@value3",totalPrice);
-                    sqlCommand.Parameters.AddWithValue("@value4",name);
-                    sqlCommand.Parameters.AddWithValue("@value5",address);
-                    sqlCommand.Parameters.AddWithValue("@value6",mobileNo);
-                    sqlCommand.Parameters.AddWithValue("@value7",empId);
-                    sqlCommand.Parameters.AddWithValue("@value8","In process");
-                    sqlCommand.Parameters.AddWithValue("@value9",username);
-                    sqlCommand.Parameters.AddWithValue("@value10",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    sqlCommand.Parameters.AddWithValue("@value11",randomstring);
+                    SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
+                    sqlCommand.CommandType=CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@operation","getDeliveryDetails");
+                    sqlCommand.Parameters.AddWithValue("@action","insertOrderList");
+                    sqlCommand.Parameters.AddWithValue("@foodName",item[0]);
+                    sqlCommand.Parameters.AddWithValue("@quantity",Convert.ToInt16(item[1]));
+                    sqlCommand.Parameters.AddWithValue("@totalPrice",totalPrice);
+                    sqlCommand.Parameters.AddWithValue("@name",name);
+                    sqlCommand.Parameters.AddWithValue("@address",address);
+                    sqlCommand.Parameters.AddWithValue("@mobile",mobileNo);
+                    sqlCommand.Parameters.AddWithValue("@empid",empId);
+                    sqlCommand.Parameters.AddWithValue("@status","In process");
+                    sqlCommand.Parameters.AddWithValue("@userName",userName);
+                    sqlCommand.Parameters.AddWithValue("@dateTime",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    sqlCommand.Parameters.AddWithValue("@orderId",randomstring);
 
                     sqlCommand.ExecuteNonQuery(); 
                     sqlConnection.Close();
@@ -87,8 +94,11 @@ class OrderModel
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("delete from cartlist where username=@value", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@value",username);
+                SqlCommand sqlCommand = new SqlCommand("EditCartList", sqlConnection);
+                sqlCommand.CommandType=CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@operation","getDeliveryDetails");
+                sqlCommand.Parameters.AddWithValue("@action","deleteCartList");
+                sqlCommand.Parameters.AddWithValue("@name",userName);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -103,8 +113,11 @@ class OrderModel
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist where username=@value order by datetime desc ", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@value",username);
+                SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
+                sqlCommand.CommandType=CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@operation","viewOrderList");
+                sqlCommand.Parameters.AddWithValue("@action","selectAllOrderList");
+                sqlCommand.Parameters.AddWithValue("@userName",username);
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
@@ -116,8 +129,11 @@ class OrderModel
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist where username=@value and (datetime between DATEADD(day,-1,GETDATE()) and datetime) order by datetime desc ", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@value",username);
+                SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
+                sqlCommand.CommandType=CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@operation","viewOrderList");
+                sqlCommand.Parameters.AddWithValue("@action","selectOneDay");
+                sqlCommand.Parameters.AddWithValue("@userName",username);
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
@@ -129,8 +145,11 @@ class OrderModel
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("SELECT * from orderlist where username=@value and (datetime between DATEADD(day,-10,GETDATE()) and datetime) order by datetime desc", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@value",username);
+                SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
+                sqlCommand.CommandType=CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@operation","viewOrderList");
+                sqlCommand.Parameters.AddWithValue("@action","selectTenDays");
+                sqlCommand.Parameters.AddWithValue("@userName",username);
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
@@ -142,11 +161,14 @@ class OrderModel
     {
         using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("delete from orderlist where username=@value and orderid=@value2 and foodname=@value3", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@value",username);
-                sqlCommand.Parameters.AddWithValue("@value2",orderId);
-                sqlCommand.Parameters.AddWithValue("@value3",foodname);
+                sqlConnection.Open();               
+                SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
+                sqlCommand.CommandType=CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@operation","removeOrder");
+                sqlCommand.Parameters.AddWithValue("@action","deleteOrder");
+                sqlCommand.Parameters.AddWithValue("@userName",username);
+                sqlCommand.Parameters.AddWithValue("@orderId",orderId);
+                sqlCommand.Parameters.AddWithValue("@foodName",foodname);
                 sqlCommand.ExecuteNonQuery();
 
             }

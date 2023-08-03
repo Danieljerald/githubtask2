@@ -61,7 +61,7 @@
     </style>
     
         <div id="imghorizontal">
-                        <a href="@Url.Action("Shop", "User", new { filterItem = "*" })"><span class="span"><strong>All</strong></span></a>
+                        <a href="@Url.Action("Shop", "User", new { filterItem = "all" })"><span class="span"><strong>All</strong></span></a>
                         <a href="@Url.Action("Shop", "User", new { filterItem = "junk" })"><span class="span"><strong>Sandwich</strong></span></a>
                         <a href="@Url.Action("Shop", "User", new { filterItem = "north" })"><span class="span"><strong>North</strong></span></a>
                         <a href="@Url.Action("Shop", "User", new { filterItem = "south" })"><span class="span"><strong>South</strong></span></a>
@@ -88,7 +88,7 @@
                         <p class="card-text">@item[2]</p>
                     </div>
                     <div class="card-footer">
-                        <a href="@Url.Action("addCart", "User",new { addCart = @item[0]})"><button type="button" class="btn btn-dark">Add to cart</button></a>
+                        <a href="@Url.Action("addCart", "User",new { foodName = @item[0]})"><button type="button" class="btn btn-dark">Add to cart</button></a>
                     </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Digitalrestaurantorderplatform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71693ae97e05922a1eb4ae49d9afa4104795546d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e0fd72b8962f27ec42bf007cc57721714c01ed3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Digitalrestaurantorderplatform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Digitalrestaurantorderplatform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

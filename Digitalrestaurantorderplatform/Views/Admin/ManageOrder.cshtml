@@ -50,7 +50,6 @@ body{
                 <th scope="col">orderId</th>
                 <th scope="col">Delivery Details</th>
                 <th scope="col">Ordered On</th>
-                <th scope="col">Price</th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
             </tr>
@@ -67,7 +66,6 @@ body{
                     <td>@item[10]</td>
                     <td>@item[3]<br>,@item[4]<br>,@item[5]<br>,@item[6]</td>
                     <td>@item[9]</td>
-                    <td>@item[2]</td>
                     <td>@item[7]</td>
                     <td><a href="@Url.Action("ManageOrder", "Admin", new { orderId = @item[10] , orderstatus = "delivered"})"><input id="orderdone-btn" type="button" value="Order Done"></a></td>
                     </tr>
