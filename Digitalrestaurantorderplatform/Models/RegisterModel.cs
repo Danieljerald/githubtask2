@@ -1,5 +1,6 @@
 #nullable disable
 using System;
+using System.Data;
 using System.Data.SqlClient;
 
 
@@ -8,15 +9,18 @@ namespace Digitalrestaurantorderplatform.Models
     class RegisterModel
     {
 
-        private Dictionary<string, string[]> userlist = new Dictionary<string, string[]>();
+        Dictionary<string, string[]> userList = new Dictionary<string, string[]>();
         public RegisterModel(IConfiguration configuration)
         {
-            using (SqlConnection connection = new SqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
+            using (SqlConnection sqlConnection = new SqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
             {
                 try
                 {
-                    connection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("select * from customerlist", connection);
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("productlist",sqlConnection);
+                    sqlCommand.CommandType=CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@operation","constructor");
+                    sqlCommand.Parameters.AddWithValue("@action","selectUsers");
                     SqlDataReader sqlReader = sqlCommand.ExecuteReader();
                     while (sqlReader.Read())
                     {
@@ -24,9 +28,9 @@ namespace Digitalrestaurantorderplatform.Models
                         string[] userdata = new string[2];
                         userdata[0] = sqlReader["email"].ToString();
                         userdata[1] = sqlReader["password"].ToString();
-                        if (!userlist.ContainsKey(sqlReader["name"].ToString()))
+                        if (!userList.ContainsKey(sqlReader["name"].ToString()))
                         {
-                            userlist.Add(sqlReader["name"].ToString(), userdata);
+                            userList.Add(sqlReader["name"].ToString(), userdata);
                         }
                     }
                 }
@@ -63,14 +67,14 @@ namespace Digitalrestaurantorderplatform.Models
             string cpassword = signupmodel.cpassword;
             bool usernameflag = true;
             bool emailflag = true;
-            foreach (KeyValuePair<string, string[]> item in userlist)
+            foreach (KeyValuePair<string, string[]> item in userList)
             {
                 if (string.Equals(username, item.Key))
                 {
                     usernameflag = false;
                 }
             }
-            foreach (KeyValuePair<string, string[]> item in userlist)
+            foreach (KeyValuePair<string, string[]> item in userList)
             {
                 if (String.Equals(email, item.Value[0]))
                 {
@@ -87,7 +91,7 @@ namespace Digitalrestaurantorderplatform.Models
                         string[] userdata = new string[2];
                         userdata[0] = email;
                         userdata[1] = password;
-                        userlist.Add(username, userdata);
+                        userList.Add(username, userdata);
                         return 1;
                     }
                 }
@@ -109,7 +113,7 @@ namespace Digitalrestaurantorderplatform.Models
             }
             else
             {
-                foreach (KeyValuePair<string, string[]> item in userlist)
+                foreach (KeyValuePair<string, string[]> item in userList)
                 {
                     if (String.Equals(username, item.Key) && String.Equals(password, item.Value[1]))
                     {
@@ -139,7 +143,7 @@ namespace Digitalrestaurantorderplatform.Models
             {
                 return 3;
             }
-            foreach (KeyValuePair<string, string[]> item in userlist)
+            foreach (KeyValuePair<string, string[]> item in userList)
             {
                 if (String.Equals(username, item.Key) && String.Equals(email, item.Value[0]))
                 {

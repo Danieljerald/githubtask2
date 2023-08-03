@@ -6,10 +6,10 @@ namespace Digitalrestaurantorderplatform.Models;
 
 class AdminModel
 {
-    private readonly string connectionString;
+    private readonly string _connectionString;
     internal AdminModel(IConfiguration configuration)
     {
-        connectionString=configuration["ConnectionStrings:DefaultConnection"];
+        _connectionString=configuration["ConnectionStrings:DefaultConnection"];
     }
     //thread method
     static void Print()
@@ -18,7 +18,7 @@ class AdminModel
     }
     internal DataTable getOrderList()
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
@@ -34,7 +34,7 @@ class AdminModel
     }
     internal void changeStatus(string orderid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("AdminModel", sqlConnection);
@@ -47,7 +47,7 @@ class AdminModel
     } 
     internal void updateStatus(string orderid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("AdminModel", sqlConnection);
@@ -63,7 +63,7 @@ class AdminModel
         
         try
         {           
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("AdminModel", sqlConnection);
@@ -89,7 +89,7 @@ class AdminModel
     }
     internal DataTable viewMenu()
     {          
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("productlist", sqlConnection);
@@ -104,7 +104,7 @@ class AdminModel
     }
     internal void updateVisibility(string visibility,int productid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             //creating thread
             Thread thread = new Thread(new ThreadStart(Print));
@@ -123,7 +123,7 @@ class AdminModel
     }
     internal void deleteFood(int productid)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("AdminModel", sqlConnection);
@@ -137,7 +137,7 @@ class AdminModel
     }
     internal DataTable fetchReport()
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("AdminModel", sqlConnection);
@@ -153,7 +153,7 @@ class AdminModel
     internal DataTable downloadReport(string empname)
     {
 
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("AdminModel", sqlConnection);

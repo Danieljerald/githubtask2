@@ -10,15 +10,15 @@ namespace Digitalrestaurantorderplatform.Controllers;
 public class HomeController : Controller
 {
     private AppDbContext _database;
-    private readonly string adminUsername,adminPassword;
+    private readonly string _adminUsername,_adminPassword;
 
     private IConfiguration _configuration;
     public HomeController(AppDbContext database,IConfiguration configuration)
    {
         _database=database;
         _configuration=configuration;
-        adminUsername=configuration["AdminLogin:AdminId"];
-        adminPassword=configuration["AdminLogin:Password"];
+        _adminUsername=configuration["AdminLogin:AdminId"];
+        _adminPassword=configuration["AdminLogin:Password"];
    }
     public class SessionNotFoundException : Exception  
     {  
@@ -105,7 +105,7 @@ public class HomeController : Controller
     {
         ViewBag.admin=HttpContext.Session.GetString("admin");
         RegisterModel registerModel=new RegisterModel(_configuration);
-        int check=registerModel.loginValidation(login,adminUsername,adminPassword);
+        int check=registerModel.loginValidation(login,_adminUsername,_adminPassword);
         if(check==1)
         {
             HttpContext.Session.SetString("user",login.name);

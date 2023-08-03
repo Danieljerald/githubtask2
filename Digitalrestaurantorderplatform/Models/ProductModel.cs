@@ -9,15 +9,15 @@ namespace Digitalrestaurantorderplatform.Models;
 
 class ProductModel
 {
-    private readonly string connectionString;
+    private readonly string _connectionString;
     internal ProductModel(IConfiguration configuration)
     {
-        connectionString=configuration["ConnectionStrings:DefaultConnection"];
+        _connectionString=configuration["ConnectionStrings:DefaultConnection"];
     }
     internal DataTable getProductDetails(string filterItem)
     {
 
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             if(filterItem==null)
@@ -65,7 +65,7 @@ class ProductModel
         MenuModel menuModel=new MenuModel();
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {    
                 
                 sqlConnection.Open();
@@ -82,7 +82,7 @@ class ProductModel
                     menuModel.image=(byte[])sqlDataReader[3];   
                 }
             }
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {    
                 
                 sqlConnection.Open();
@@ -98,7 +98,7 @@ class ProductModel
                     return 2;
                 }
             }
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("productlist",sqlConnection);
@@ -129,7 +129,7 @@ class ProductModel
     }
     internal DataTable getCartList(string name)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("EditCartList", sqlConnection);
@@ -146,7 +146,7 @@ class ProductModel
     }
     internal void deleteCart(string foodname,string name)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand=new SqlCommand("EditCartList", sqlConnection);
@@ -169,7 +169,7 @@ class ProductModel
     {
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("EditCartList", sqlConnection);
@@ -190,7 +190,7 @@ class ProductModel
     internal void decreaseQuantity(string foodname,string name)
     {
         int count=0;
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand=new SqlCommand("EditCartList", sqlConnection);
@@ -205,7 +205,7 @@ class ProductModel
                 count=Convert.ToInt32(sqlDataReader["quantity"].ToString());
             }
         }
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             if(count>1)
             {
@@ -225,7 +225,7 @@ class ProductModel
         int count=0;
         try
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand=new SqlCommand("EditCartList", sqlConnection);
@@ -249,29 +249,5 @@ class ProductModel
         }
         
     }
-    // internal int getProductTotalPrice(string username)
-    // {
-    //     int count=0;
-    //     try
-    //     {
-    //         using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-    //         {
-    //             sqlConnection.Open();
-    //             SqlCommand sqlCommand=new SqlCommand("EditCartList", sqlConnection);
-    //             sqlCommand.CommandType=CommandType.StoredProcedure;
-    //             sqlCommand.Parameters.AddWithValue("@action","selectCartList");
-    //             sqlCommand.Parameters.AddWithValue("@operation","getProductTotalPrice");
-    //             sqlCommand.Parameters.AddWithValue("@name",username);
-    //             count = Convert.ToInt32(sqlCommand.ExecuteScalar());
-    //         }
-    //         return count;
-    //     }
-    //     catch (SystemException)
-    //     { 
-    //         Console.WriteLine("Error in fetching product total price");
-    //         return 0;
-    //     }
-        
-    // }
     
 }

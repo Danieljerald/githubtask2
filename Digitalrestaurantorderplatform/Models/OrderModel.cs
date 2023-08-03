@@ -6,12 +6,12 @@ namespace Digitalrestaurantorderplatform.Models;
 
 class OrderModel
 {
-    private readonly string connectionString;
+    private readonly string _connectionString;
     private IConfiguration _configuration;
     internal OrderModel(IConfiguration configuration)
     {
         _configuration=configuration;
-        connectionString=configuration["ConnectionStrings:DefaultConnection"];
+        _connectionString=configuration["ConnectionStrings:DefaultConnection"];
     }
     internal int getDeliveryDetails(string userName,OrderDetailsModel orderDetails)
     {
@@ -23,7 +23,7 @@ class OrderModel
         
         List<string[]> productList=new List<string[]>();
 
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("EditCartList", sqlConnection);
@@ -42,7 +42,7 @@ class OrderModel
         }
         ProductModel productModel=new ProductModel(_configuration);
         int totalPrice=productModel.getTotalPrice(userName);
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
             try
             {
@@ -91,7 +91,7 @@ class OrderModel
         }
         if (flag)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("EditCartList", sqlConnection);
@@ -110,7 +110,7 @@ class OrderModel
     {
         if (sort=="All")
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
@@ -126,7 +126,7 @@ class OrderModel
         }
         else if (sort=="last1day")
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
@@ -142,7 +142,7 @@ class OrderModel
         }
         else
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
@@ -159,7 +159,7 @@ class OrderModel
     }
     internal void removeOrder(string username,string orderId,string foodname)
     {
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 sqlConnection.Open();               
                 SqlCommand sqlCommand = new SqlCommand("OrderListStoredProcedure", sqlConnection);
