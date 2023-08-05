@@ -2,12 +2,13 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 #nullable disable
-namespace Digitalrestaurantorderplatform.Models;
-
-class AdminModel
+using Digitalrestaurantorderplatform.IRepository;
+using Digitalrestaurantorderplatform.Models;
+namespace Digitalrestaurantorderplatform.Repository;
+class AdminModel:IAdminModel
 {
     private readonly string _connectionString;
-    internal AdminModel(IConfiguration configuration)
+    public AdminModel(IConfiguration configuration)
     {
         _connectionString=configuration["ConnectionStrings:DefaultConnection"];
     }
@@ -16,7 +17,7 @@ class AdminModel
     {
         Console.WriteLine("Changes successful");
     }
-    internal DataTable getOrderList()
+    public DataTable getOrderList()
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -32,7 +33,7 @@ class AdminModel
         } 
 
     }
-    internal void changeStatus(string orderid)
+    public void changeStatus(string orderid)
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -45,7 +46,7 @@ class AdminModel
             sqlCommand.ExecuteNonQuery();
         }
     } 
-    internal void updateStatus(string orderid)
+    public void updateStatus(string orderid)
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -58,7 +59,7 @@ class AdminModel
             sqlCommand.ExecuteNonQuery();
         }
     }
-    internal void updateMenu(MenuModel menu)
+    public void updateMenu(MenuModel menu)
     {
         
         try
@@ -87,7 +88,7 @@ class AdminModel
         
         
     }
-    internal DataTable viewMenu()
+    public DataTable viewMenu()
     {          
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -102,7 +103,7 @@ class AdminModel
             return dataTable;
         }
     }
-    internal void updateVisibility(string visibility,int productid)
+    public void updateVisibility(string visibility,int productid)
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -121,7 +122,7 @@ class AdminModel
         }
 
     }
-    internal void deleteFood(int productid)
+    public void deleteFood(int productid)
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -135,7 +136,7 @@ class AdminModel
         }
 
     }
-    internal DataTable fetchReport()
+    public DataTable fetchReport()
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -150,7 +151,7 @@ class AdminModel
             return dataTable;
         }
     }
-    internal DataTable downloadReport(string empname)
+    public DataTable downloadReport(string empname)
     {
 
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
