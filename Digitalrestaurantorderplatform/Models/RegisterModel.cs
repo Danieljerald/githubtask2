@@ -45,20 +45,7 @@ namespace Digitalrestaurantorderplatform.Models
             }
         }
 
-        // public static String getConnectionString()
-        // {
-
-        //     //  var build = new ConfigurationBuilder()
-        //     // .SetBasePath(Directory.GetCurrentDirectory())
-        //     // .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-        //     // IConfiguration configuration = build.Build();
-
-        //     // String connectionString = Convert.ToString(configuration.GetConnectionString("DefaultConnection"));
-        //     // if(connectionString != null)
-        //     //     return connectionString;
-        //     // return "";
-        // }
+        
         internal int signUpValidation(SignUpModel signupmodel)
         {
             string username = signupmodel.name;
