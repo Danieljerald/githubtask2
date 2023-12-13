@@ -8,10 +8,17 @@
 using Microsoft.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Digitalrestaurantorderplatform.Models;
+using Digitalrestaurantorderplatform.Repository;
+using Digitalrestaurantorderplatform.IRepository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IAdminModel, AdminModel>();
+
+
 builder.Services.AddDistributedMemoryCache();
 //entity framework
 builder.Services.AddDbContext<AppDbContext>(options=> options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

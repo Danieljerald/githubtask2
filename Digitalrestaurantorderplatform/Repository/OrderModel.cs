@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 #nullable disable
-namespace Digitalrestaurantorderplatform.Models;
-
+using Digitalrestaurantorderplatform.Models;
+namespace Digitalrestaurantorderplatform.Repository;
 class OrderModel
 {
     private readonly string _connectionString;
