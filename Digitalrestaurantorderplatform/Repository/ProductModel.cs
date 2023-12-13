@@ -3,18 +3,18 @@ using System;
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
-
-
-namespace Digitalrestaurantorderplatform.Models;
+// using Digitalrestaurantorderplatform.IRepository;
+using Digitalrestaurantorderplatform.Models;
+namespace Digitalrestaurantorderplatform.Repository;
 
 class ProductModel
 {
     private readonly string _connectionString;
-    internal ProductModel(IConfiguration configuration)
+    public ProductModel(IConfiguration configuration)
     {
         _connectionString=configuration["ConnectionStrings:DefaultConnection"];
     }
-    internal DataTable getProductDetails(string filterItem)
+    public DataTable getProductDetails(string filterItem)
     {
 
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
@@ -60,7 +60,7 @@ class ProductModel
         }
 
     }
-    internal int addCartItems(string foodName,string name)
+    public int addCartItems(string foodName,string name)
     {
         MenuModel menuModel=new MenuModel();
         try
@@ -127,7 +127,7 @@ class ProductModel
         }
         
     }
-    internal DataTable getCartList(string name)
+    public DataTable getCartList(string name)
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -144,7 +144,7 @@ class ProductModel
             return dataTable;
         } 
     }
-    internal void deleteCart(string foodname,string name)
+    public void deleteCart(string foodname,string name)
     {
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
         {
@@ -165,7 +165,7 @@ class ProductModel
             }
         }
     }
-    internal void increaseQuantity(string foodname,string name)
+    public void increaseQuantity(string foodname,string name)
     {
         try
         {
@@ -187,7 +187,7 @@ class ProductModel
         }
         
     }
-    internal void decreaseQuantity(string foodname,string name)
+    public void decreaseQuantity(string foodname,string name)
     {
         int count=0;
         using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
@@ -220,7 +220,7 @@ class ProductModel
             }
         }    
     }
-    internal int getTotalPrice(string username)
+    public int getTotalPrice(string username)
     {
         int count=0;
         try

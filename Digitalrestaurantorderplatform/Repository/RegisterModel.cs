@@ -2,11 +2,11 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-
-
-namespace Digitalrestaurantorderplatform.Models
+using Digitalrestaurantorderplatform.Models;
+using Digitalrestaurantorderplatform.IRepository;
+namespace Digitalrestaurantorderplatform.Repository
 {
-    class RegisterModel
+    class RegisterModel:IUserModel
     {
 
         Dictionary<string, string[]> userList = new Dictionary<string, string[]>();
@@ -46,7 +46,7 @@ namespace Digitalrestaurantorderplatform.Models
         }
 
         
-        internal int signUpValidation(SignUpModel signupmodel)
+        public int signUpValidation(SignUpModel signupmodel)
         {
             string username = signupmodel.name;
             string email = signupmodel.email;
@@ -87,7 +87,7 @@ namespace Digitalrestaurantorderplatform.Models
             return 2;
         }
 
-        internal int loginValidation(LoginModel loginmodel,string adminUsername,string adminPassword)
+        public int loginValidation(LoginModel loginmodel,string adminUsername,string adminPassword)
         {
             
             string username = loginmodel.name;
@@ -118,7 +118,7 @@ namespace Digitalrestaurantorderplatform.Models
             }
 
         }
-        internal int ResetPassword(SignUpModel details)
+        public int ResetPassword(SignUpModel details)
         {
             string username = details.name;
             string email = details.email;

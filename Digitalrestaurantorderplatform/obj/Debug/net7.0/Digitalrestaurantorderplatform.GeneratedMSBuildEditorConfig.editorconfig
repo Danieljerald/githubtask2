@@ -9,85 +9,85 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Digitalrestaurantorderplatform
 build_property.RootNamespace = Digitalrestaurantorderplatform
-build_property.ProjectDir = F:\internproj\Digitalrestaurantorderplatform\
+build_property.ProjectDir = f:\internproj\Digitalrestaurantorderplatform\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = F:\internproj\Digitalrestaurantorderplatform
+build_property.MSBuildProjectDirectory = f:\internproj\Digitalrestaurantorderplatform
 build_property._RazorSourceGeneratorDebug = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Admin/AdminIndex.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Admin/AdminIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Admin/DeliveryReport.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Admin/DeliveryReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVsaXZlcnlSZXBvcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Admin/GetFeedback.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Admin/GetFeedback.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2V0RmVlZGJhY2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Admin/ManageOrder.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Admin/ManageOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlT3JkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Admin/ManageProduct.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Admin/ManageProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlUHJvZHVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Admin/Menu.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Admin/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWVudS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Home/ForgotPassword.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Home/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Home/Index.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Home/Login.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Home/SignUp.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Home/SignUp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaWduVXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Shared/Error.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Shared/_ValidationScriptsPartial.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/User/Cart.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/User/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/User/DeliveryDetails.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/User/DeliveryDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxpdmVyeURldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/User/Shop.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/User/Shop.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaG9wLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/User/ViewOrder.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/User/ViewOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3T3JkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/_ViewImports.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/_ViewStart.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/internproj/Digitalrestaurantorderplatform/Views/Shared/_Layout.cshtml]
+[f:/internproj/Digitalrestaurantorderplatform/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-pfnnqetw70
