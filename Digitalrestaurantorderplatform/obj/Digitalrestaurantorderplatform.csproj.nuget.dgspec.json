@@ -1,32 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {}
+    "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {}
   },
   "projects": {
-    "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {
+    "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
+        "projectUniqueName": "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
         "projectName": "Digitalrestaurantorderplatform",
-        "projectPath": "F:\\internproj\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
-        "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-        "outputPath": "F:\\internproj\\Digitalrestaurantorderplatform\\obj\\",
+        "projectPath": "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Digitalrestaurantorderplatform\\Digitalrestaurantorderplatform.csproj",
+        "packagesPath": "C:\\Users\\daniel.jerald\\.nuget\\packages\\",
+        "outputPath": "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Digitalrestaurantorderplatform\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\daniel.jerald\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -37,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
@@ -108,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.5.23303.2\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,32 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "F:\\internproj\\Feedback\\Feedback.csproj": {}
+    "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Feedback\\Feedback.csproj": {}
   },
   "projects": {
-    "F:\\internproj\\Feedback\\Feedback.csproj": {
+    "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Feedback\\Feedback.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\internproj\\Feedback\\Feedback.csproj",
+        "projectUniqueName": "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Feedback\\Feedback.csproj",
         "projectName": "Feedback",
-        "projectPath": "F:\\internproj\\Feedback\\Feedback.csproj",
-        "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-        "outputPath": "F:\\internproj\\Feedback\\obj\\",
+        "projectPath": "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Feedback\\Feedback.csproj",
+        "packagesPath": "C:\\Users\\daniel.jerald\\.nuget\\packages\\",
+        "outputPath": "C:\\Traning Assignment\\intern proj\\DigitalRestaurantOrderingPlatform\\Feedback\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\daniel.jerald\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -37,12 +35,12 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[7.0.2, )"
+              "version": "[8.0.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -82,7 +80,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
@@ -120,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.5.23303.2\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
